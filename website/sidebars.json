@@ -1,0 +1,18 @@
+{
+  "docs": {
+    "Basics": [
+        "get-started",
+        "benchmarks",
+        "configuration"
+    ],
+    "Advanced Topics": [
+        "persistent-cache",
+        "transpilers",
+        "webpack-loaders"
+    ],
+    "More": [
+        "roadmap",
+        "contribute"
+    ]
+  }
+}
