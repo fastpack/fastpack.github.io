@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Benchmarks · Fastpack</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Benchmarks · Fastpack"/><meta property="og:type" content="website"/><meta property="og:url" content="https://fastpack.github.io//index.html"/><meta property="og:description" content="All benchmarks are collected on a real project consisting of **1602 modules**,"/><meta property="og:image" content="https://fastpack.github.io//img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://fastpack.github.io//img/docusaurus.png"/><link rel="shortcut icon" href="/null"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">Fastpack</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/get-started.html" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/contribute.html" target="_self">Contribute!</a></li><li class=""><a href="https://github.com/fastpack/fastpack" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/get-started.html">Get Started</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/benchmarks.html">Benchmarks</a></li><li class="navListItem"><a class="navItem" href="/docs/configuration.html">Configuration</a></li></ul></div><div class="navGroup navGroupActive"><h3>Advanced Topics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/persistent-cache.html">Persistent Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/transpilers.html">Transpilers</a></li><li class="navListItem"><a class="navItem" href="/docs/webpack-loaders.html">Webpack Loaders</a></li></ul></div><div class="navGroup navGroupActive"><h3>More</h3><ul><li class="navListItem"><a class="navItem" href="/docs/roadmap.html">Roadmap</a></li><li class="navListItem"><a class="navItem" href="/docs/contribute.html">Contribute</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Benchmarks</h1></header><article><div><span><p>All benchmarks are collected on a real project consisting of <strong>1602 modules</strong>,
+resulting bundle size is <strong>~5.8Mb</strong> unzipped.  We have used 13&quot; MacBook Pro 2015.</p>
+<table>
+<thead>
+<tr><th></th><th style="text-align:center">Fastpack</th><th style="text-align:center">Fastpack+Babel</th><th style="text-align:center">Webpack 4.6.0</th><th style="text-align:center">Parcel 1.5.1</th></tr>
+</thead>
+<tbody>
+<tr><td>initial build</td><td style="text-align:center"><strong>2.148s</strong></td><td style="text-align:center">3.383s</td><td style="text-align:center">6.113s</td><td style="text-align:center">24.32s</td></tr>
+<tr><td>- persistent cache</td><td style="text-align:center"><strong>0.176s</strong></td><td style="text-align:center">0.219s</td><td style="text-align:center">N/A</td><td style="text-align:center">14.88s</td></tr>
+<tr><td>- watch mode</td><td style="text-align:center"><strong>0.074s</strong></td><td style="text-align:center">0.171s</td><td style="text-align:center">0.612s</td><td style="text-align:center">0.354s</td></tr>
+</tbody>
+</table>
+<ul>
+<li>all bundlers started 5 times and the best result was taken</li>
+<li>same for the watch mode: file was modified several times</li>
+<li><strong>Parcel</strong> results may not be representative since we didn't manage to
+configure it specifically, so very likely it does more than we need.</li>
+<li><code>.babelrc</code> used for last 3 configurations:
+<pre><code class="hljs css JavaScript">  {
+    <span class="hljs-string">"presets"</span>: [<span class="hljs-string">"next/babel"</span>],
+    <span class="hljs-string">"plugins"</span>: [<span class="hljs-string">"transform-flow-strip-types"</span>, <span class="hljs-string">"react-native-web"</span>]
+  }
+</code></pre></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="fastpack"></a><a href="#fastpack" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fastpack</h2>
+<p>Here is the command line used to build, no additional configuration specified:</p>
+<pre><code class="hljs css Bash">$ fpack \
+    ./ui/index.js \
+    -o build \
+    -w \
+    --development \
+    --node-modules <span class="hljs-string">"<span class="hljs-variable">$(pwd)</span>/node_modules"</span> \
+    --node-modules node_modules \
+    --preprocess=<span class="hljs-string">'^ui/.+\.js$'</span> \
+    --preprocess=<span class="hljs-string">'^node_modules/components/[^/]+\.js$'</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="fastpack-babel"></a><a href="#fastpack-babel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fastpack+Babel</h2>
+<p>It may be slower or faster depending on the <a href="http://babeljs.io/">Babel</a>
+configuration.</p>
+<pre><code class="hljs css Bash">$ fpack \
+    ./ui/index.js \
+    -o build \
+    --development \
+    -w \
+    --node-modules <span class="hljs-string">"<span class="hljs-variable">$(pwd)</span>/node_modules"</span> \
+    --node-modules node_modules \
+    --preprocess=<span class="hljs-string">'^ui/.+\.js$:babel-loader?filename=.babelrc&amp;sourceMap=false'</span> \
+    --preprocess=<span class="hljs-string">'^node_modules/components/[^/]+\.js$:babel-loader?filename=.babelrc&amp;sourceMap=false'</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="webpack"></a><a href="#webpack" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Webpack</h2>
+<p>The command-line used:</p>
+<pre><code class="hljs css Bash">$ webpack --mode development --config webpack.config.js --watch
+</code></pre>
+<p><code>webpack.config.js</code>:</p>
+<pre><code class="hljs css JavaScript"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">entry</span>: <span class="hljs-string">"./ui/index.js"</span>,
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">path</span>: path.resolve(<span class="hljs-string">"dist"</span>),
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">"index_bundle_webpack.js"</span>
+  },
+  <span class="hljs-attr">resolve</span>: {
+    <span class="hljs-attr">modules</span>: [path.join(process.cwd(), <span class="hljs-string">'node_modules'</span>), <span class="hljs-string">'./node_modules'</span>]
+  },
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
+        <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
+        <span class="hljs-attr">use</span>: <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">"babel-loader"</span>),
+      },
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/^node_modules\/components\/[^\/]+\.js?$/</span>,
+        <span class="hljs-attr">use</span>: <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">"babel-loader"</span>),
+      }
+    ]
+  }
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="parcel"></a><a href="#parcel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parcel</h2>
+<p>As stated above, we was unable to configure Parcel in order to emulate the same
+behaviour as Webpack/Fastpack. So, very likely, Parcel simply does more than we
+need it to do. On the other hand, we are feeling OK to take the
+&quot;zero-configuration&quot; metaphor literally and just tweaked it just to exclude
+source maps and hot module reloading. Here is the command line used:</p>
+<pre><code class="hljs css Bash">$ parcel watch --no-hmr --no-source-maps ui/index.js
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="get-started.html">← Get Started</a><a class="docs-next button" href="configuration.html">Configuration →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#fastpack">Fastpack</a></li><li><a href="#fastpack-babel">Fastpack+Babel</a></li><li><a href="#webpack">Webpack</a></li><li><a href="#parcel">Parcel</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/get-started.html">Get Started</a><a href="/docs/roadmap.html">Roadmap</a></div><div><h5>Community</h5><a href="/docs/contribute.html">Contribute</a><a href="https://gitter.im/fastpack/general" target="_blank">Project Chat</a></div><div><h5>More</h5><a href="https://github.com/fastpack/fastpack/blob/master/LICENSE.txt" target="_blank">MIT License</a><a class="github-button" href="https://github.com/fastpack/fastpack" data-icon="octicon-star" data-count-href="/fastpack/fastpack/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2017 - 2018 Oleksiy Golovko &amp; Andrey Popp</section></footer></div></body></html>

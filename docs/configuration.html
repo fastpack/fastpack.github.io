@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Configuration · Fastpack</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Configuration · Fastpack"/><meta property="og:type" content="website"/><meta property="og:url" content="https://fastpack.github.io//index.html"/><meta property="og:description" content="## Overview"/><meta property="og:image" content="https://fastpack.github.io//img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://fastpack.github.io//img/docusaurus.png"/><link rel="shortcut icon" href="/null"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">Fastpack</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/get-started.html" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/docs/contribute.html" target="_self">Contribute!</a></li><li class=""><a href="https://github.com/fastpack/fastpack" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/get-started.html">Get Started</a></li><li class="navListItem"><a class="navItem" href="/docs/benchmarks.html">Benchmarks</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/configuration.html">Configuration</a></li></ul></div><div class="navGroup navGroupActive"><h3>Advanced Topics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/persistent-cache.html">Persistent Cache</a></li><li class="navListItem"><a class="navItem" href="/docs/transpilers.html">Transpilers</a></li><li class="navListItem"><a class="navItem" href="/docs/webpack-loaders.html">Webpack Loaders</a></li></ul></div><div class="navGroup navGroupActive"><h3>More</h3><ul><li class="navListItem"><a class="navItem" href="/docs/roadmap.html">Roadmap</a></li><li class="navListItem"><a class="navItem" href="/docs/contribute.html">Contribute</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Configuration</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p>Currently Fastpack only accepts the configuration as command-line arguments.
+The reason for it is simplicity and ease-of-use. We are thinking on some other
+possible options (JSON/YAML/TOML configuration, guessing the proper
+configuration), but all of those seem to be either clunky or too magical.
+Moreover, you can easily emulate the &quot;configuration file&quot; using the simple
+Shell scripting:</p>
+<pre><code class="hljs">$ cat ./build.sh
+
+#!/bin/bash
+fpack \
+    ./ui/index.js \
+    -<span class="ruby">o build \
+</span>    -<span class="ruby">w \
+</span>    -<span class="ruby">-dev \
+</span>    -<span class="ruby">-nm <span class="hljs-string">"$(pwd)/node_modules"</span> \
+</span>    -<span class="ruby">-nm node_modules \
+</span>    -<span class="ruby">-preprocess=<span class="hljs-string">'^ui/.+\.js$'</span> \
+</span>    -<span class="ruby">-preprocess=<span class="hljs-string">'^node_modules/components/.+\.js$'</span>
+</span></code></pre>
+<p>Overall, we try to maintain the strict policy of adding new configuration
+parameters - only add them if it is unavoidable. We have given up on the &quot;zero
+configuration&quot; idea, but still trying to  preserve the simplisity as much as we
+can.</p>
+<p><strong>Please note</strong>, fastpack is under heavy development now and these APIs are not
+anywhere close to be absolutely stable. Very likely, there will be breaking
+changes and additions in future releases.</p>
+<h2><a class="anchor" aria-hidden="true" id="parameters"></a><a href="#parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parameters</h2>
+<h3><a class="anchor" aria-hidden="true" id="project-directory"></a><a href="#project-directory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>project directory</h3>
+<p>The working directory <code>fpack</code> binary was executed from. Typically, this will be
+the root of your project containing the <code>package.json</code>, other configuration
+files, and the source code. You cannot require/import the module outside of the
+project directory. This is done for security reasons, so that
+<code>require('../../etc/passwd')</code> is impossible. If you really need to access some
+outside files, create the symlink inside and use it in <code>require()</code> or <code>import</code>
+statements.</p>
+<h3><a class="anchor" aria-hidden="true" id="entry-points"></a><a href="#entry-points" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>entry points</h3>
+<p>The list of positional arguments to the <code>fpack</code> binary. For example:</p>
+<pre><code class="hljs css Bash">$ fpack <span class="hljs-string">'.'</span> ui/index.js some-module
+</code></pre>
+<p>Defaults to <code>['.']</code>. <code>'.'</code> resolves in a following way:</p>
+<ul>
+<li>if <code>package.json</code> exists in the project directory, then following values will
+be used this order (first non-empty): <code>&quot;module&quot;</code>, <code>&quot;main&quot;</code>;</li>
+<li>if nothing of the above worked - use <code>index.js</code>.</li>
+</ul>
+<p>There is one little trick <code>fpack</code> accounts for considering the entry point.
+These 2 forms are considered identical, when specifying the entry point:
+<code>./lib/index.js</code> and <code>lib/index.js</code>. This is done in order to simplify
+command-line usage and Tab-completion.</p>
+<h3><a class="anchor" aria-hidden="true" id="development"></a><a href="#development" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--development</h3>
+<p>By default <code>fpack</code> runs in <strong>production</strong> mode:</p>
+<ul>
+<li><code>process.env.NODE_ENV</code> is replaced with the <code>&quot;production&quot;</code> string;</li>
+<li>all conditionals using <code>process.env.NODE_ENV</code> patched in a way that only
+&quot;production&quot; branch remains in the code;</li>
+<li>bundle is built in a <em>flat</em> way, removing the module structure, appying
+tree-shaking, and pre-optimizing for minification (much like Rollup does).</li>
+<li><a href="/docs/persistent-cache.html">persistent cache</a> is not used.</li>
+</ul>
+<p>In <strong>development</strong> mode:</p>
+<ul>
+<li><code>process.env.NODE_ENV</code> is replaced with the <code>&quot;development&quot;</code> string;</li>
+<li>all conditionals using <code>process.env.NODE_ENV</code> patched in a way that only
+&quot;development&quot; branch remains in the code;</li>
+<li>bundle is built in a <em>scoped</em> way, i.e. the Object containing all the modules
+and dependencies between those;</li>
+<li><strong>development</strong> bundles are easier and faster to build;</li>
+<li><a href="#watch">watching</a> the filesystem only takes effect when executed in
+<strong>development</strong> mode.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="output"></a><a href="#output" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--output</h3>
+<p>Output directory. Defaults to <code>./bundle</code>. Shortcut: <code>-o</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="watch"></a><a href="#watch" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--watch</h3>
+<p>Watch the filesystem and rebuild on file change. Has no effect without
+<code>--development</code> flag. Shortcut: <code>-w</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="target"></a><a href="#target" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--target</h3>
+<p>Build target. Defaults to <code>app</code>. Possible values:</p>
+<ul>
+<li><em>app</em>: application target. No additional code generated.</li>
+<li><em>esm</em>: EcmaScript modules target. One <code>export</code> statement is generated listing
+all the symbols from the first entry point</li>
+<li><em>cjs</em>: CommonJS target. <code>module.exports = require('first entry point');</code>
+statement is added to the end of the bundle.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="preprocess"></a><a href="#preprocess" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--preprocess</h3>
+<p>Preprocess the file before adding it to the bundle. Can be added multiple
+times. Has the following form: <code>PATTERN:PROCESSOR?OPTIONS[!...]</code>:</p>
+<ul>
+<li><code>PATTERN</code> is the PCRE regular expression which will be applied to filename to
+check if processor should be applied to it.</li>
+<li><code>PATTERN</code> is applied to a filename <strong>excluding</strong> the
+<a href="#project-directory">project-directory</a>. For example
+<code>/my/project/lib/index.js</code> will match the regexp <code>^lib.+js$</code>, but not
+<code>^/my.+js$</code>.</li>
+<li><code>PROCESSOR</code> is one of <code>builtin</code> or <a href="/docs/webpack-loaders.html">Webpack loader</a>.</li>
+<li><code>builtin</code> provides the set of JavaScript <a href="/docs/transpilers.html">transpilers</a>:
+stripping Flow types, object spread &amp; rest operators, class properties
+(including statics), class/method decorators, and React-assumed JSX
+conversion.</li>
+<li><code>builtin</code> could be omitted, i.e. <code>\.js$</code> and <code>\.js$:builtin</code> are equal.</li>
+<li>Webpack loader may accept some options in a form <code>'x=y&amp;a=b</code>.</li>
+<li>You can apply several preprocessors to one file separating them using the
+<code>!</code>. In this case preprocessors are applied left to right.</li>
+</ul>
+<p>Here is an example of packing the
+<a href="https://github.com/facebook/create-react-app">create-react-app</a>-based
+application in <strong>development</strong> mode:</p>
+<pre><code class="hljs css Bash">fpack src/index.js \
+    --development \
+    --preprocess=<span class="hljs-string">'^src.+\.js$'</span> \
+    --preprocess=<span class="hljs-string">'\.svg$:url-loader'</span> \
+    --preprocess=<span class="hljs-string">'\.css$:style-loader!css-loader?importLoaders=1!postcss-loader?path=postcss.config.js'</span>
+</code></pre>
+<p>And <strong>production</strong>:</p>
+<pre><code class="hljs css Bash">fpack src/index.js \
+    --preprocess=<span class="hljs-string">'^src.+\.js$:babel-loader?filename=.babelrc'</span> \
+    --preprocess=<span class="hljs-string">'\.svg$:file-loader?name=static/media/[name].[hash:8].[ext]&amp;publicPath=http://localhost:4321/pack-cra/prod/'</span> \
+    --preprocess=<span class="hljs-string">'\.css$:style-loader!css-loader?importLoaders=1!postcss-loader?path=postcss.config.js'</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="postprocess"></a><a href="#postprocess" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--postprocess</h3>
+<p>Postprocess the content of a bundle through the external shell <code>COMMAND</code>.  The
+content of the bundle will be sent to STDIN and STDOUT output will be
+collected. If multiple commands are specified they will be applied in the order
+of appearance. <strong>Note</strong>, this parameter is very likely to change its form, once
+<code>fpack</code> is able to produce chunked bundles.</p>
+<h3><a class="anchor" aria-hidden="true" id="node-modules"></a><a href="#node-modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--node-modules</h3>
+<p>Provide the list of 'node_modules' locations. Defaults to <code>[node_modules]</code>. If
+absolute path is specified, it is taken as is, otherwise every parent directory
+is searched up to the <a href="#project-directory">project-directory</a>.
+Shortcut: <code>--nm</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="no-cache"></a><a href="#no-cache" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--no-cache</h3>
+<p>Do not use <a href="/docs/persistent-cache.html">persistent cache</a>. Has no effect in the
+<strong>production</strong> mode since persistent cache is not used anyway.</p>
+<h3><a class="anchor" aria-hidden="true" id="debug"></a><a href="#debug" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--debug</h3>
+<p>Print debugging output.</p>
+<h3><a class="anchor" aria-hidden="true" id="version"></a><a href="#version" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--version</h3>
+<p>Display version and exit.</p>
+<h3><a class="anchor" aria-hidden="true" id="help"></a><a href="#help" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>--help</h3>
+<p>Display help message.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="benchmarks.html">← Benchmarks</a><a class="docs-next button" href="persistent-cache.html">Persistent Cache →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#parameters">Parameters</a><ul class="toc-headings"><li><a href="#project-directory">project directory</a></li><li><a href="#entry-points">entry points</a></li><li><a href="#development">--development</a></li><li><a href="#output">--output</a></li><li><a href="#watch">--watch</a></li><li><a href="#target">--target</a></li><li><a href="#preprocess">--preprocess</a></li><li><a href="#postprocess">--postprocess</a></li><li><a href="#node-modules">--node-modules</a></li><li><a href="#no-cache">--no-cache</a></li><li><a href="#debug">--debug</a></li><li><a href="#version">--version</a></li><li><a href="#help">--help</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"></a><div><h5>Docs</h5><a href="/docs/get-started.html">Get Started</a><a href="/docs/roadmap.html">Roadmap</a></div><div><h5>Community</h5><a href="/docs/contribute.html">Contribute</a><a href="https://gitter.im/fastpack/general" target="_blank">Project Chat</a></div><div><h5>More</h5><a href="https://github.com/fastpack/fastpack/blob/master/LICENSE.txt" target="_blank">MIT License</a><a class="github-button" href="https://github.com/fastpack/fastpack" data-icon="octicon-star" data-count-href="/fastpack/fastpack/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2017 - 2018 Oleksiy Golovko &amp; Andrey Popp</section></footer></div></body></html>
