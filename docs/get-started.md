@@ -76,9 +76,9 @@ $ fpack ./ui/index.js \
     --nm "$(pwd)/node_modules" \
     --nm node_modules \
     --preprocess='^ui/.+\.js$' \
-    --preprocess='^node_modules/components/.+\.js$'
+    --preprocess='^node_modules/components/[^/]+\.js$'
 
-Packed in 2.935s. Bundle: 5.87Mb. Modules: 1602. Cache: empty. Mode: development.
+Packed in 2.148s. Bundle: 5.87Mb. Modules: 1602. Cache: empty. Mode: development.
 Watching file changes (Ctrl+C to stop)
 
 $ fpack ./ui/index.js \

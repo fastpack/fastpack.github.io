@@ -106,11 +106,12 @@ const why = `
 
 const benchmarks = `
 **1602 modules / 5.8Mb / MB Pro 2015**
-|                       |Fastpack|Webpack|Parcel
+|                       |Fastpack|Webpack|Parcel<sup>*</sup>
 |-----------------------|:------:|:-----:|:----:
 |initial build          | **2.148s**  | 6.113s | 24.32s
 |- [persistent cache](${docUrl('persistent-cache.html')}) | **0.176s**  | N/A | 14.88s
 |- watch mode   | **0.074s**  | 0.612s  | 0.354s
+<small style="font-size: 0.7em;"><sup>*</sup>We are unsure if Parcel can be configured?<br/></small>
 [More on benchmarks...](${docUrl('benchmarks.html')})
 `;
 
