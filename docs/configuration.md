@@ -122,7 +122,7 @@ times. Has the following form: `PATTERN:PROCESSOR?OPTIONS[!...]`:
 - `builtin` could be omitted, i.e. `\.js$` and `\.js$:builtin` are equal.
 - Webpack loader may accept some options in a form `'x=y&a=b`.
 - You can apply several preprocessors to one file separating them using the
-  `!`. In this case preprocessors are applied left to right.
+  `!`. In this case preprocessors are applied right to left.
 
 Here is an example of packing the
 [create-react-app](https://github.com/facebook/create-react-app)-based

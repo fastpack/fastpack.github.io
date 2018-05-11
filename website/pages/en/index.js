@@ -109,7 +109,7 @@ const benchmarks = `
 |                       |Fastpack|Webpack|Parcel
 |-----------------------|:------:|:-----:|:----:
 |initial build          | **2.148s**  | 6.113s | 24.32s
-|- persistent cache | **0.176s**  | N/A | 14.88s
+|- [persistent cache](${docUrl('persistent-cache.html')}) | **0.176s**  | N/A | 14.88s
 |- watch mode   | **0.074s**  | 0.612s  | 0.354s
 [More on benchmarks...](${docUrl('benchmarks.html')})
 `;
@@ -117,7 +117,7 @@ const benchmarks = `
 const pre = "```";
 const install = `
 ${pre}Bash
-$ npm install fpack
+$ npm install -g fpack
 $ fpack --help
 ${pre}
 `;

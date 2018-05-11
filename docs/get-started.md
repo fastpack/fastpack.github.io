@@ -17,11 +17,10 @@ bug](https://github.com/fastpack/fastpack/issues) or
 
 ## Installation
 
-Just do:
 ```Bash
 $ npm install -g fpack
 ```
-or
+Or
 ```Bash
 $ yarn add global fpack
 ```
@@ -48,11 +47,11 @@ Fastpack currently can:
   used in production mode;
 - utilize the persistent cache to speed up the building when restarted;
 - watch for file changes and rebuild;
-- [transpile](transpilers.html) minimum required of non-stadrad features to
+- [transpile](transpilers.md) minimum required of non-stadrad features to
   work in evergreen browsers (React JSX, strip Flow, object spread & class
   properties/decorators);
-- interoperate with the most common [Webpack loaders]() to include CSS and
-  static files;
+- interoperate with the most common [Webpack loaders](webpack-loaders.md) to
+  include CSS and static files;
 - accept certain configuration parameters as command-line arguments;
 
 Fastpack lacks (yet!):
@@ -63,7 +62,7 @@ Fastpack lacks (yet!):
 - easy JavaScript integration;
 
 Most of the lacking features listed above are in a plan though. See
-[roadmap](roadmap.html) and don't hesitate to [contibute](contribute.html) -
+[roadmap](roadmap.md) and don't hesitate to [contibute](contribute.md) -
 working with Ocaml is so much fun!
 
 ## Example
