@@ -47,7 +47,7 @@ Fastpack currently can:
   used in production mode;
 - utilize the persistent cache to speed up the building when restarted;
 - watch for file changes and rebuild;
-- [transpile](transpilers.md) minimum required of non-stadrad features to
+- [transpile](transpilers.md) minimum required of non-standard features to
   work in evergreen browsers (React JSX, strip Flow, object spread & class
   properties/decorators);
 - interoperate with the most common [Webpack loaders](webpack-loaders.md) to
