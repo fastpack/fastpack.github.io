@@ -97,10 +97,10 @@ module.exports = {
 
 ## Parcel
 
-As stated above, we was unable to configure Parcel in order to emulate the same
+As stated above, we were unable to configure Parcel in order to emulate the same
 behaviour as Webpack/Fastpack. So, very likely, Parcel simply does more than we
 need it to do. On the other hand, we are feeling OK to take the
-"zero-configuration" metaphor literally and just tweaked it just to exclude
+"zero-configuration" metaphor literally and just tweaked it to exclude
 source maps and hot module reloading. Here is the command line used:
 
 ```Bash
