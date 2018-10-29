@@ -54,7 +54,7 @@ include CSS and static files;</li>
 </ul>
 <p>Most of the lacking features listed above are in a plan though. See
 <a href="/docs/roadmap.html">roadmap</a> and don't hesitate to <a href="/docs/contribute.html">contibute</a> -
-working with Ocaml is so much fun!</p>
+working with ReasonML is so much fun!</p>
 <h2><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
 <p>Here is an example of the <code>fpack</code> usage:</p>
 <pre><code class="hljs css bash">$ fpack ./ui/index.js \
@@ -66,7 +66,7 @@ working with Ocaml is so much fun!</p>
     --preprocess=<span class="hljs-string">'^ui/.+\.js$'</span> \
     --preprocess=<span class="hljs-string">'^node_modules/components/[^/]+\.js$'</span>
 
-Packed <span class="hljs-keyword">in</span> 2.148s. Bundle: 5.87Mb. Modules: 1602. Cache: empty. Mode: development.
+Packed <span class="hljs-keyword">in</span> 0.948s. Bundle: 5.87Mb. Modules: 1602. Cache: empty. Mode: development.
 Watching file changes (Ctrl+C to stop)
 
 $ fpack ./ui/index.js \
@@ -98,10 +98,12 @@ named <code>build/index.js</code>;</li>
 <h2><a class="anchor" aria-hidden="true" id="thank-you"></a><a href="#thank-you" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thank you!</h2>
 <p>Fastpack would not be possible without prior work performed in following projects:</p>
 <ul>
-<li><a href="http://ocaml.org/">OCaml</a>: I cannot describe the pleasure working with this
-language, you should try it yourself!</li>
+<li><a href="http://ocaml.org/">OCaml</a> / <a href="https://reasonml.github.io/">ReasonML</a>: I
+cannot describe the pleasure working with this languages, you should try it
+yourself!</li>
 <li><a href="https://flow.org/">Flow</a>: We used their parser/AST code as the base.</li>
-<li><a href="https://esy.sh/">Esy</a>: <code>package.json</code>-driven virtual environment for OCaml.
+<li><a href="https://esy.sh/">Esy</a>: <code>package.json</code>-driven virtual environment for
+OCaml/ReasonML.
 Helps a lot to install/update dependencies, make releases and keep
 the environment sane.</li>
 <li>All of these great libraries: <a href="https://ocsigen.org/lwt/">Lwt</a>,
