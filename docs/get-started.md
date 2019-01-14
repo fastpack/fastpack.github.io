@@ -22,7 +22,7 @@ $ npm install -g fpack
 ```
 Or
 ```Bash
-$ yarn add global fpack
+$ yarn global add fpack
 ```
 
 If everything worked well, you should be able to run:
